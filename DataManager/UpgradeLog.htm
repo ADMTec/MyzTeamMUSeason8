@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+ <html xmlns:msxsl="urn:schemas-microsoft-com:xslt"><head><meta content="en-us" http-equiv="Content-Language" /><meta content="text/html; charset=utf-16" http-equiv="Content-Type" /><title _locID="ConversionReport0">
+          Relatório de Migração
+        </title><style> 
+                    /* Body style, for the entire document */
+                    body
+                    {
+                        background: #F3F3F4;
+                        color: #1E1E1F;
+                        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                        padding: 0;
+                        margin: 0;
+                    }
+
+                    /* Header1 style, used for the main title */
+                    h1
+                    {
+                        padding: 10px 0px 10px 10px;
+                        font-size: 21pt;
+                        background-color: #E2E2E2;
+                        border-bottom: 1px #C1C1C2 solid; 
+                        color: #201F20;
+                        margin: 0;
+                        font-weight: normal;
+                    }
+
+                    /* Header2 style, used for "Overview" and other sections */
+                    h2
+                    {
+                        font-size: 18pt;
+                        font-weight: normal;
+                        padding: 15px 0 5px 0;
+                        margin: 0;
+                    }
+
+                    /* Header3 style, used for sub-sections, such as project name */
+                    h3
+                    {
+                        font-weight: normal;
+                        font-size: 15pt;
+                        margin: 0;
+                        padding: 15px 0 5px 0;
+                        background-color: transparent;
+                    }
+
+                    /* Color all hyperlinks one color */
+                    a
+                    {
+                        color: #1382CE;
+                    }
+
+                    /* Table styles */ 
+                    table
+                    {
+                        border-spacing: 0 0;
+                        border-collapse: collapse;
+                        font-size: 10pt;
+                    }
+
+                    table th
+                    {
+                        background: #E7E7E8;
+                        text-align: left;
+                        text-decoration: none;
+                        font-weight: normal;
+                        padding: 3px 6px 3px 6px;
+                    }
+
+                    table td
+                    {
+                        vertical-align: top;
+                        padding: 3px 6px 5px 5px;
+                        margin: 0px;
+                        border: 1px solid #E7E7E8;
+                        background: #F7F7F8;
+                    }
+
+                    /* Local link is a style for hyperlinks that link to file:/// content, there are lots so color them as 'normal' text until the user mouse overs */
+                    .localLink
+                    {
+                        color: #1E1E1F;
+                        background: #EEEEED;
+                        text-decoration: none;
+                    }
+
+                    .localLink:hover
+                    {
+                        color: #1382CE;
+                        background: #FFFF99;
+                        text-decoration: none;
+                    }
+
+                    /* Center text, used in the over views cells that contain message level counts */ 
+                    .textCentered
+                    {
+                        text-align: center;
+                    }
+
+                    /* The message cells in message tables should take up all avaliable space */
+                    .messageCell
+                    {
+                        width: 100%;
+                    }
+
+                    /* Padding around the content after the h1 */ 
+                    #content 
+                    {
+	                    padding: 0px 12px 12px 12px; 
+                    }
+
+                    /* The overview table expands to width, with a max width of 97% */ 
+                    #overview table
+                    {
+                        width: auto;
+                        max-width: 75%; 
+                    }
+
+                    /* The messages tables are always 97% width */
+                    #messages table
+                    {
+                        width: 97%;
+                    }
+
+                    /* All Icons */
+                    .IconSuccessEncoded, .IconInfoEncoded, .IconWarningEncoded, .IconErrorEncoded
+                    {
+                        min-width:18px;
+                        min-height:18px; 
+                        background-repeat:no-repeat;
+                        background-position:center;
+                    }
+
+                    /* Success icon encoded */
+                    .IconSuccessEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconSuccess#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABcElEQVR4Xq2TsUsCURzHv15g8ZJcBWlyiYYgCIWcb9DFRRwMW5TA2c0/QEFwFkxxUQdxVlBwCYWOi6IhWgQhBLHJUCkhLr/BW8S7gvrAg+N+v8/v+x68Z8MGy+XSCyABQAXgBgHGALoASkIIDWSLeLBetdHryMjd5IxQPWT4rn1c/P7+xxp72Cs9m5SZ0Bq2vPnbPFafK2zDvmNHypdC0BPkLlQhxJsCAhQoZwdZU5mwxh720qGo8MzTxTTKZDPCx2HoVzp6lz0Q9tKhyx0kGs8Ny+TkWRKk8lCROwEduhyg9l/6lunOPSfmH3NUH6uQ0KHLAe7JYvJjevm+DAMGJHToKtigE+vwvIidxLamb8IBY9e+C5LiXREkfho3TSd06HJA13/oh6T51MTsfQbHrsMynQ5dDihFjiK8JJAU9AKIWTp76dCVN7HWHrajmUEGvyF9nkbAE6gLIS7kTUyuf2gscLoJrElZo/Mvj+nPz/kLTmfnEwP3tB0AAAAASUVORK5CYII=);
+                    }
+
+                    /* Information icon encoded */
+                    .IconInfoEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconInformation#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHElEQVR4Xs2TsUoDQRRF7wwoziokjZUKadInhdhukR9YP8DMX1hYW+QvdsXa/QHBbcXC7W0CamWTQnclFutceIQJwwaWNLlwm5k5d94M76mmaeCrrmsLYOocY12FcxZFUeozCqKqqgYA8uevv1H6VuPxcwlfk5N92KHBxfFeCSAxxswlYAW/Xr989x/mv9gkhtyMDhcAxgzRsp7flj8B/HF1RsMXq+NZMkopaHe7lbKxQUEIGbKsYNoGn969060hZBkQex/W8oRQwsQaW2o3Ago2SVcJUzAgY3N0lTCZZm+zPS8HB51gMmS1DEYyOz9acKO1D8JWTlafKIMxdhvlfdyT94Vv5h7P8Ky7nQzACmhvKq3zk3PjW9asz9D/1oigecsioooAAAAASUVORK5CYII=);
+                    }
+
+                    /* Warning icon encoded */
+                    .IconWarningEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconWarning#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAx0lEQVR4XpWSMQ7CMAxFf4xAyBMLCxMrO8dhaBcuwdCJS3RJBw7SA/QGTCxdWJgiQYWKXJWKIXHIlyw5lqr34tQgEOdcBsCOx5yZK3hCCKdYXneQkh4pEfqzLfu+wVDSyyzFoJjfz9NB+pAF+eizx2Vruts0k15mPgvS6GYvpVtQhB61IB/dk6AF6fS4Ben0uIX5odtFe8Q/eW1KvFeH4e8khT6+gm5B+t3juyDt7n0jpe+CANTd+oTUjN/U3yVaABnSUjFz/gFq44JaVSCXeQAAAABJRU5ErkJggg==);
+                    }
+
+                    /* Error icon encoded */
+                    .IconErrorEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconError#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABQElEQVR4XqWTvUoEQRCE6wYPZUA80AfwAQz23uCMjA7MDRQEIzPBVEyNTQUFIw00vcQTTMzuAh/AxEQQT8HF/3G/oGGnEUGuoNnd6qoZuqltyKEsyzVJq5I6rnUp6SjGeGhESikzzlc1eL7opfuVbrqbU1Zw9NCgtQMaZpY0eNnaaL2fHusvTK5vKu7sjSS1Y4y3QUA6K3e3Mau5UFDyMP7tYF9o8cAHZv68vipoIJg971PZIZ5HiwdvYGGvFVFHmGmZ2MxwmQYPXubPl9Up0tfoMQGetXd6mRbvhBw+boZ6WF7Mbv1+GsHRk0fQmPAH1GfmZirbCfDJ61tw3Px8/8pZsPAG4jlVhcPgZ7adwNWBB68lkRQWFiTgFlbnLY3DGGM7izIJIyT/jjIvEJw6fdJTc6krDzh6aMwMP9bvDH4ADSsa9uSWVJkAAAAASUVORK5CYII=);
+                    }
+                 </style><script type="text/javascript" language="javascript"> 
+          
+            // Startup 
+            // Hook up the the loaded event for the document/window, to linkify the document content
+            var startupFunction = function() { linkifyElement("messages"); };
+            
+            if(window.attachEvent)
+            {
+              window.attachEvent('onload', startupFunction);
+            }
+            else if (window.addEventListener) 
+            {
+              window.addEventListener('load', startupFunction, false);
+            }
+            else 
+            {
+              document.addEventListener('load', startupFunction, false);
+            } 
+            
+            // Toggles the visibility of table rows with the specified name 
+            function toggleTableRowsByName(name)
+            {
+               var allRows = document.getElementsByTagName('tr');
+               for (i=0; i < allRows.length; i++)
+               {
+                  var currentName = allRows[i].getAttribute('name');
+                  if(!!currentName && currentName.indexOf(name) == 0)
+                  {
+                      var isVisible = allRows[i].style.display == ''; 
+                      isVisible ? allRows[i].style.display = 'none' : allRows[i].style.display = '';
+                  }
+               }
+            }
+            
+            function scrollToFirstVisibleRow(name) 
+            {
+               var allRows = document.getElementsByTagName('tr');
+               for (i=0; i < allRows.length; i++)
+               {
+                  var currentName = allRows[i].getAttribute('name');
+                  var isVisible = allRows[i].style.display == ''; 
+                  if(!!currentName && currentName.indexOf(name) == 0 && isVisible)
+                  {
+                     allRows[i].scrollIntoView(true); 
+                     return true; 
+                  }
+               }
+               
+               return false;
+            }
+            
+            // Linkifies the specified text content, replaces candidate links with html links 
+            function linkify(text)
+            {
+                 if(!text || 0 === text.length)
+                 {
+                     return text; 
+                 }
+
+                 // Find http, https and ftp links and replace them with hyper links 
+                 var urlLink = /(http|https|ftp)\:\/\/[a-zA-Z0-9\-\.]+(:[a-zA-Z0-9]*)?\/?([a-zA-Z0-9\-\._\?\,\/\\\+&%\$#\=~;\{\}])*/gi;
+                 
+                 return text.replace(urlLink, '<a href="$&">$&</a>') ;
+            }
+            
+            // Linkifies the specified element by ID
+            function linkifyElement(id)
+            {
+                var element = document.getElementById(id);
+                if(!!element)
+                {
+                  element.innerHTML = linkify(element.innerHTML); 
+                }
+            }
+            
+            function ToggleMessageVisibility(projectName)
+            {
+              if(!projectName || 0 === projectName.length)
+              {
+                return; 
+              }
+              
+              toggleTableRowsByName("MessageRowClass" + projectName);
+              toggleTableRowsByName('MessageRowHeaderShow' + projectName);
+              toggleTableRowsByName('MessageRowHeaderHide' + projectName); 
+            }
+            
+            function ScrollToFirstVisibleMessage(projectName)
+            {
+              if(!projectName || 0 === projectName.length)
+              {
+                return; 
+              }
+              
+              // First try the 'Show messages' row
+              if(!scrollToFirstVisibleRow('MessageRowHeaderShow' + projectName))
+              {
+                // Failed to find a visible row for 'Show messages', try an actual message row 
+                scrollToFirstVisibleRow('MessageRowClass' + projectName); 
+              }
+            }
+           </script></head><body><h1 _locID="ConversionReport">
+          Relatório de Migração - </h1><div id="content"><h2 _locID="OverviewTitle">Visão geral</h2><div id="overview"><table><tr><th></th><th _locID="ProjectTableHeader">Projeto</th><th _locID="PathTableHeader">Caminho</th><th _locID="ErrorsTableHeader">Erros</th><th _locID="WarningsTableHeader">Avisos</th><th _locID="MessagesTableHeader">Mensagens</th></tr><tr><td class="IconWarningEncoded" /><td><strong><a href="#zDBManager">zDBManager</a></strong></td><td>Source\zDBManager.csproj</td><td class="textCentered"><a>0</a></td><td class="textCentered"><a href="#zDBManagerWarning">1</a></td><td class="textCentered"><a href="#" onclick="ScrollToFirstVisibleMessage('zDBManager'); return false;">71</a></td></tr><tr><td class="IconWarningEncoded" /><td><strong><a href="#Solution"><span _locID="OverviewSolutionSpan">Solução</span></a></strong></td><td>zDBManager.sln</td><td class="textCentered"><a>0</a></td><td class="textCentered"><a href="#SolutionWarning">1</a></td><td class="textCentered"><a href="#" onclick="ScrollToFirstVisibleMessage('Solution'); return false;">2</a></td></tr></table></div><h2 _locID="SolutionAndProjectsTitle">Solução e projetos</h2><div id="messages"><a name="zDBManager" /><h3>zDBManager</h3><table><tr id="zDBManagerHeaderRow"><th></th><th class="messageCell" _locID="MessageTableHeader">Mensagem</th></tr><tr name="WarningRowClasszDBManager"><td class="IconWarningEncoded"><a name="zDBManagerWarning" /></td><td class="messageCell"><strong>Source\zDBManager.csproj:
+        </strong><span>O destino do seu projeto é .NET Framework 2.0 ou 3.0. Se seu projeto usa um assembly que necessita de um .NET Framework mais novo, seu projeto irá falhar ao compilar. É possível modificar a versão do .NET Framework clicando em Propriedades no menu do projeto e selecionando a nova versão na caixa de listagem suspensa do '.NET Framework'. (No Visual Basic, isto pode ser encontrado na aba Compile clicando no botão 'Opções do Compilador Avançadas...' .)</span></td></tr><tr name="MessageRowHeaderShowzDBManager"><td class="IconInfoEncoded" /><td class="messageCell"><a _locID="ShowAdditionalMessages" href="#" name="zDBManagerMessage" onclick="ToggleMessageVisibility('zDBManager'); return false;">
+          Mostrar 71 mensagens adicionais
+        </a></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\zDBManager.csproj:
+        </strong><span>O backup do arquivo de projeto foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\zDBManager.csproj</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\zDBManager.csproj.user:
+        </strong><span>O backup do arquivo de projeto do usuário foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\zDBManager.csproj.user</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\About.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\About.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\About.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\About.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\AccountEditor.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\AccountEditor.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\AccountEditor.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\AccountEditor.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\Premium.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\Premium.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\Premium.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\Premium.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\Warehouse.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\Warehouse.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\Warehouse.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\Warehouse.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Create.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Create.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Create.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Create.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Editor.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Editor.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Editor.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Editor.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Item.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Item.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Item.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Item.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\SkillsEditor.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\SkillsEditor.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\SkillsEditor.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\SkillsEditor.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\DBLite.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\DBLite.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Extra.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Extra.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Find.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Find.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Find.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Find.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Form1.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Form1.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Form1.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Form1.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\CharPanel.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\CharPanel.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\CharPanel.designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\CharPanel.designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipEditor.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipEditor.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipEditor.designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipEditor.designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipItem.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipItem.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipItemInfo.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipItemInfo.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipPanel.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipPanel.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipPanel.designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipPanel.designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipProperty.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipProperty.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipProperty.designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipProperty.designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\LogWindow.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\LogWindow.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\LogWindow.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\LogWindow.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Program.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Program.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Properties\AssemblyInfo.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Properties\AssemblyInfo.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Properties\Resources.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Properties\Resources.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Properties\Settings.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Properties\Settings.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Settings.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Settings.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Settings.Designer.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Settings.Designer.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Settings1.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Settings1.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\SingleApplication.cs:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\SingleApplication.cs</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Properties\Settings.settings:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Properties\Settings.settings</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Resources\SkillSlot.jpg:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Resources\SkillSlot.jpg</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Resources\Bg_test_2.jpg:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Resources\Bg_test_2.jpg</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Properties\app.manifest:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Properties\app.manifest</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Resources\unknownItem.jpg:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Resources\unknownItem.jpg</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\app.config:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\app.config</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Resources\Logo.jpg:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Resources\Logo.jpg</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\zTeam.ico:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\zTeam.ico</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\About.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\About.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\AccountEditor.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\AccountEditor.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\Premium.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\Premium.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Account\Warehouse.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Account\Warehouse.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Create.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Create.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Editor.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Editor.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\Item.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\Item.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Character\SkillsEditor.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Character\SkillsEditor.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Find.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Find.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Form1.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Form1.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\CharPanel.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\CharPanel.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipEditor.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipEditor.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipPanel.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipPanel.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Items\EquipProperty.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Items\EquipProperty.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\LogWindow.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\LogWindow.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Properties\Resources.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Properties\Resources.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\Settings.resx:
+        </strong><span>O backup do arquivo foi concluído com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\Source\Settings.resx</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\zDBManager.csproj:
+        </strong><span>Projeto migrado com êxito</span></td></tr><tr name="MessageRowClasszDBManager" style="display: none"><td class="IconInfoEncoded"><a name="zDBManagerMessage" /></td><td class="messageCell"><strong>Source\zDBManager.csproj:
+        </strong><span>Verificação concluída: a migração não é necessária para arquivos de projeto.</span></td></tr><tr style="display: none" name="MessageRowHeaderHidezDBManager"><td class="IconInfoEncoded" /><td class="messageCell"><a _locID="HideAdditionalMessages" href="#" name="zDBManagerMessage" onclick="ToggleMessageVisibility('zDBManager'); return false;">
+          Ocultar 71 mensagens adicionais
+        </a></td></tr></table><a name="Solution" /><h3 _locID="ProjectDisplayNameHeader">Solução</h3><table><tr id="SolutionHeaderRow"><th></th><th class="messageCell" _locID="MessageTableHeader">Mensagem</th></tr><tr name="WarningRowClassSolution"><td class="IconWarningEncoded"><a name="SolutionWarning" /></td><td class="messageCell"><strong>zDBManager.sln:
+        </strong><span>O Visual Studio precisa fazer alterações não funcionais a este projeto para permitir que ele seja aberto em versões liberadas do Visual Studio mais novas que o Visual Studio 2010 SP1 sem impactar o comportamento do projeto.</span></td></tr><tr name="MessageRowHeaderShowSolution"><td class="IconInfoEncoded" /><td class="messageCell"><a _locID="ShowAdditionalMessages" href="#" name="SolutionMessage" onclick="ToggleMessageVisibility('Solution'); return false;">
+          Mostrar 2 mensagens adicionais
+        </a></td></tr><tr name="MessageRowClassSolution" style="display: none"><td class="IconInfoEncoded"><a name="SolutionMessage" /></td><td class="messageCell"><strong>zDBManager.sln:
+        </strong><span>Arquivo armazenado em backup com êxito como G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Backup\zDBManager.sln</span></td></tr><tr name="MessageRowClassSolution" style="display: none"><td class="IconInfoEncoded"><a name="SolutionMessage" /></td><td class="messageCell"><strong>zDBManager.sln:
+        </strong><span>Solução migrada com êxito</span></td></tr><tr style="display: none" name="MessageRowHeaderHideSolution"><td class="IconInfoEncoded" /><td class="messageCell"><a _locID="HideAdditionalMessages" href="#" name="SolutionMessage" onclick="ToggleMessageVisibility('Solution'); return false;">
+          Ocultar 2 mensagens adicionais
+        </a></td></tr></table></div></div></body></html>

@@ -1,0 +1,26 @@
+C:\Job\Season 8\Source\zDBManager\Source\bin\Debug\zDBManager.exe.config
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\bin\Debug\zDBManager.exe.config
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\bin\Debug\zDBManager.exe
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\bin\Debug\zDBManager.pdb
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.csproj.AssemblyReference.cache
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.About.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Account.AccountEditor.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Account.Premium.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Account.Warehouse.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Character.Create.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Character.Editor.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Character.Item.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Character.SkillsEditor.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Find.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Form1.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.CharPanel.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.EquipEditor.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.EquipPanel.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.EquipProperty.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.LogWindow.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Properties.Resources.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.Settings.resources
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.csproj.GenerateResource.cache
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.csproj.CoreCompileInputs.cache
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.exe
+G:\Projeto 2024\Tools for the project\Projeto 2025 Ferramenta\zTeam-season-8-master\zTeam-season-8-master\DataManager\Source\obj\Debug\zDBManager.pdb
