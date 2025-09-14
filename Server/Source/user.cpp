@@ -77,6 +77,7 @@
 #include "..\pugixml\pugixml.hpp"
 #include "MapRateInfo.h"
 #include "ShopPointEx.h"
+#include <algorithm>
 
 #if (ENABLE_CUSTOM_OFFLINETRADE == 1)
 #include "OfflineTrade.h"
@@ -1294,8 +1295,8 @@ void gObjCharZeroSet(int aIndex)
 #endif
 
 	lpObj->pTransaction = 0;
-	//Here to change 0 to 4
-	lpObj->pInventoryExtend = 0;
+	//Initialize expanded inventory with a safe default size
+	lpObj->pInventoryExtend = 4;
 	gObjMonsterHitDamageInit(lpObj);
 	gObjSetInventory1Pointer(&gObj[aIndex]);
 
