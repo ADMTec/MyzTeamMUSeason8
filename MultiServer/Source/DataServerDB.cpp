@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DataServerDB.h"
 #include "zMultiServer.h"
+#include <algorithm>
 
 CQuery g_DataServerDB;
 
@@ -1606,13 +1607,14 @@ char szQuery[256];
 
 void ExpandInventory(char* szAccountID,char* szName,int count)
 {
-	char szQuery[256];
+        char szQuery[256];
 
-	sprintf(szQuery,"UPDATE Character SET ExInventory = %d WHERE AccountID = '%s' AND Name = '%s'",
-		count,szAccountID,szName);
+        int clamped = std::clamp(count, 1, 4);
+        sprintf(szQuery,"UPDATE Character SET ExInventory = %d WHERE AccountID = '%s' AND Name = '%s'",
+                clamped,szAccountID,szName);
 
-	g_DataServerDB.Exec(szQuery);
-	g_DataServerDB.Clear();
+        g_DataServerDB.Exec(szQuery);
+        g_DataServerDB.Clear();
 }
 
 void MuBotSaveOption(char* szName,LPMUBOT_SETTINGS_REQ_SAVE lpMsg)
