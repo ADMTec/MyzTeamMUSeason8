@@ -2058,57 +2058,18 @@ void JGGetCharacterInfo( SDHP_DBCHAR_INFORESULT * lpMsg)
 	pjMsg.MaxAddPoint = MaxAddPoint;
 	pjMsg.wMinusPoint = MinusPoint;
 	pjMsg.wMaxMinusPoint = MaxMinusPoint;
-	//Here fix btExInventory to btInventoryExpansion
-	//This works
-	/*
-	pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	*/
-	//This works
+	const BYTE inventoryExpansion = lpObj->pInventoryExtend;
 
-	// Try to fix it
-	//Working
-	/*
-	if ( lpObj->pInventoryExtend > 4) {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	else {
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	*/
-	//Working
-	// Try to fix it
+	if ( inventoryExpansion > 4 )
+	{
+		LogAddC(2, "[JGGetCharacterInfo] Invalid expansion value (%u) for [%s][%s]",
+			inventoryExpansion, lpObj->AccountID, lpObj->Name);
+		CloseClient(aIndex);
 
-	// Full Fixed
-	if ( lpObj->pInventoryExtend > 4) {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
+		return;
 	}
-	if ( lpObj->pInventoryExtend <= 0) {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	if ( lpObj->pInventoryExtend = 1) {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	if ( lpObj->pInventoryExtend = 2) {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	if ( lpObj->pInventoryExtend = 3) {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	if ( lpObj->pInventoryExtend = 4) {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	else {
-		lpObj->pInventoryExtend = 4;
-		pjMsg.btInventoryExpansion = lpObj->pInventoryExtend;
-	}
-	// Full Fixed
+
+	pjMsg.btInventoryExpansion = inventoryExpansion;
 
 	//Added for Test
 	LogAddTD("[Expanded Inventory System] [%s][%s] (Expanded Inventory Number:%d)",
@@ -3538,7 +3499,7 @@ void DGMoveOtherServer(SDHP_CHARACTER_TRANSFER_RESULT * lpMsg)
 		
 		lpObj->m_MoveOtherServer = 0;
 		
-		GCServerMsgStringSend("¹®Á¦ ¹ß»ý½Ã change@webzen.co.kr·Î ¹®ÀÇÇØ ÁÖ½Ã±â¹Ù¶ø´Ï´Ù",lpObj->m_Index, 1);
+		GCServerMsgStringSend("ë¬¸ì œ ë°œìƒì‹œ change@webzen.co.krë¡œ ë¬¸ì˜í•´ ì£¼ì‹œê¸°ë°”ëžë‹ˆë‹¤",lpObj->m_Index, 1);
 		// Deathway translation here
 		return;
 	}
@@ -3546,8 +3507,8 @@ void DGMoveOtherServer(SDHP_CHARACTER_TRANSFER_RESULT * lpMsg)
 	LogAddTD("[CharTrasfer] Success [%s][%s] (%d)",
 		lpObj->AccountID, lpObj->Name, lpMsg->Result);
 
-	GCServerMsgStringSend("Á¢¼ÓÀÌ Á¾·áµË´Ï´Ù.", lpObj->m_Index, 1);// Deathway translation here
-	GCServerMsgStringSend("ºÐÇÒ ¼­¹ö·Î Á¢¼ÓÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.", lpObj->m_Index, 1);// Deathway translation here
+	GCServerMsgStringSend("ì ‘ì†ì´ ì¢…ë£Œë©ë‹ˆë‹¤.", lpObj->m_Index, 1);// Deathway translation here
+	GCServerMsgStringSend("ë¶„í•  ì„œë²„ë¡œ ì ‘ì†í•´ì£¼ì‹œê¸° ë°”ëžë‹ˆë‹¤.", lpObj->m_Index, 1);// Deathway translation here
 	GJSetCharacterInfo(lpObj, lpObj->m_Index, 0);
 	lpObj->LoadWareHouseInfo = false;
 	gObjCloseSet(lpObj->m_Index, 2);

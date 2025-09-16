@@ -2082,12 +2082,7 @@ BOOL gObjSetCharacter(LPBYTE lpdata, int aIndex)
 	lpObj->StartY = lpObj->Y;
 	
 	BYTE exInventory = lpMsg->btExInventory;
-	BYTE clampedExInventory = std::clamp(exInventory, (BYTE)1, (BYTE)4);
-	if (clampedExInventory != exInventory)
-	{
-		LogAddTD("[JGGetCharacterInfo] btExInventory adjusted from %d to %d", exInventory, clampedExInventory);
-	}
-	lpObj->pInventoryExtend = clampedExInventory;
+	lpObj->pInventoryExtend = exInventory;
 
 	if ( MAX_MAP_RANGE(lpObj->MapNumber) == FALSE )
 	{
