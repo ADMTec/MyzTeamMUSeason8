@@ -23,11 +23,60 @@
 #include "Achievements.h"
 #endif
 
+namespace
+{
+        const int kMaxErtelRequestAttempts = 3;
+
+        DWORD CRC32Init()
+        {
+                return 0xFFFFFFFFu;
+        }
+
+        DWORD CRC32Update(DWORD crc, const BYTE* data, int length)
+        {
+                if ( data == NULL || length <= 0 )
+                {
+                        return crc;
+                }
+
+                for ( int i = 0; i < length; ++i )
+                {
+                        crc ^= data[i];
+
+                        for ( int j = 0; j < 8; ++j )
+                        {
+                                DWORD mask = -(int)(crc & 1);
+                                crc = (crc >> 1) ^ (0xEDB88320u & mask);
+                        }
+                }
+
+                return crc;
+        }
+
+        DWORD CRC32Finalize(DWORD crc)
+        {
+                return ~crc;
+        }
+
+        DWORD CRC32Calculate(const BYTE* data, int length)
+        {
+                return CRC32Finalize(CRC32Update(CRC32Init(), data, length));
+        }
+
+        DWORD CRC32Calculate(const BYTE* first, int firstLength, const BYTE* second, int secondLength)
+        {
+                DWORD crc = CRC32Init();
+                crc = CRC32Update(crc, first, firstLength);
+                crc = CRC32Update(crc, second, secondLength);
+                return CRC32Finalize(crc);
+        }
+}
+
 CElementalSystem g_ElementalSystem;
 
 CElementalSystem::CElementalSystem()
 {
-	// Added 2 x 00
+        // Added 2 x 00
 	m_DamageTable[ELEMENT_FIRE][ELEMENT_FIRE] = 500;
 	m_DamageTable[ELEMENT_FIRE][ELEMENT_WATER] = 580;
 	m_DamageTable[ELEMENT_FIRE][ELEMENT_EARTH] = 590;
@@ -52,14 +101,16 @@ CElementalSystem::CElementalSystem()
 	m_DamageTable[ELEMENT_WIND][ELEMENT_WIND] = 500;
 	m_DamageTable[ELEMENT_WIND][ELEMENT_DARK] = 580;
 
-	m_DamageTable[ELEMENT_DARK][ELEMENT_FIRE] = 580;
-	m_DamageTable[ELEMENT_DARK][ELEMENT_WATER] = 590;
-	m_DamageTable[ELEMENT_DARK][ELEMENT_EARTH] = 510;
-	m_DamageTable[ELEMENT_DARK][ELEMENT_WIND] = 520;
-	m_DamageTable[ELEMENT_DARK][ELEMENT_DARK] = 500;
+        m_DamageTable[ELEMENT_DARK][ELEMENT_FIRE] = 580;
+        m_DamageTable[ELEMENT_DARK][ELEMENT_WATER] = 590;
+        m_DamageTable[ELEMENT_DARK][ELEMENT_EARTH] = 510;
+        m_DamageTable[ELEMENT_DARK][ELEMENT_WIND] = 520;
+        m_DamageTable[ELEMENT_DARK][ELEMENT_DARK] = 500;
 
-	memset(this->m_ErtelOption,-1,sizeof(m_ErtelOption));
-	memset(this->m_classinfo,0,sizeof(this->m_classinfo));
+        memset(this->m_ErtelOption,-1,sizeof(m_ErtelOption));
+        memset(this->m_classinfo,0,sizeof(this->m_classinfo));
+
+        m_ErtelSequenceCounter = 0;
 }
 
 CElementalSystem::~CElementalSystem()
@@ -2433,16 +2484,108 @@ BOOL CElementalSystem::Attack(LPOBJ lpObj, LPOBJ lpTargetObj, CMagicInf* lpMagic
 	return TRUE;
 }
 
+DWORD CElementalSystem::GetNextErtelSequence()
+{
+        ++m_ErtelSequenceCounter;
+
+        if ( m_ErtelSequenceCounter == 0 )
+        {
+                ++m_ErtelSequenceCounter;
+        }
+
+        return m_ErtelSequenceCounter;
+}
+
+DWORD CElementalSystem::BuildErtelDataCRC(const BYTE* list1, int list1Size, const BYTE* list2, int list2Size) const
+{
+        return CRC32Calculate(list1, list1Size, list2, list2Size);
+}
+
+DWORD CElementalSystem::BuildErtelRequestCRC(const char* account, const char* name) const
+{
+        BYTE buffer[20];
+        memcpy(buffer, account, 10);
+        memcpy(buffer + 10, name, 10);
+        return CRC32Calculate(buffer, sizeof(buffer));
+}
+
+DWORD CElementalSystem::GetPendingErtelSequence(int aIndex) const
+{
+        std::map<int, DWORD>::const_iterator it = m_mapPendingErtelSequences.find(aIndex);
+
+        if ( it == m_mapPendingErtelSequences.end() )
+        {
+                return 0;
+        }
+
+        return it->second;
+}
+
+void CElementalSystem::CompleteErtelSequence(int aIndex)
+{
+        m_mapPendingErtelSequences.erase(aIndex);
+        m_mapErtelRetryCount.erase(aIndex);
+}
+
+bool CElementalSystem::CanRetryErtelRequest(int aIndex) const
+{
+        return GetErtelRetryCount(aIndex) < kMaxErtelRequestAttempts;
+}
+
+int CElementalSystem::GetErtelRetryCount(int aIndex) const
+{
+        std::map<int, int>::const_iterator it = m_mapErtelRetryCount.find(aIndex);
+
+        if ( it == m_mapErtelRetryCount.end() )
+        {
+                return 0;
+        }
+
+        return it->second;
+}
+
 void CElementalSystem::GDReqErtelList(int aIndex)
 {
-	PMSG_REQ_ERTELLIST pMsg;
-	PHeadSetB((LPBYTE)&pMsg,0xA4,sizeof(pMsg));
+        if ( aIndex < 0 || aIndex >= OBJMAX )
+        {
+                return;
+        }
 
-	pMsg.aIndex = aIndex;
-	memcpy(pMsg.szAccount,gObj[aIndex].AccountID,10);
-	memcpy(pMsg.szName,gObj[aIndex].Name,10);
+        PMSG_REQ_ERTELLIST pMsg;
+        PHeadSetB((LPBYTE)&pMsg,0xA4,sizeof(pMsg));
 
-	cDBSMng.Send((PCHAR)&pMsg,sizeof(pMsg));
+        pMsg.aIndex = aIndex;
+        char szAccount[11];
+        char szName[11];
+
+        memcpy(szAccount, gObj[aIndex].AccountID, 10);
+        szAccount[10] = '\0';
+
+        memcpy(szName, gObj[aIndex].Name, 10);
+        szName[10] = '\0';
+
+        int attempt = ++m_mapErtelRetryCount[aIndex];
+
+        if ( attempt > kMaxErtelRequestAttempts )
+        {
+                m_mapErtelRetryCount[aIndex] = kMaxErtelRequestAttempts;
+
+                LogAddTD("[ErtelSync] Request attempt limit reached (%d) [%s][%s]", attempt,
+                        szAccount, szName);
+
+                return;
+        }
+
+        memcpy(pMsg.szAccount, szAccount, 10);
+        memcpy(pMsg.szName, szName, 10);
+
+        pMsg.dwSequence = GetNextErtelSequence();
+        m_mapPendingErtelSequences[aIndex] = pMsg.dwSequence;
+        pMsg.dwCRC = BuildErtelRequestCRC(pMsg.szAccount, pMsg.szName);
+
+        cDBSMng.Send((PCHAR)&pMsg,sizeof(pMsg));
+
+        LogAddTD("[ErtelSync] GDReqErtelList seq:%u attempt:%d [%s][%s]", pMsg.dwSequence, attempt, szAccount, szName);
 }
 
 void CElementalSystem::DGAnsErtelList(PMSG_ANS_ERTELLIST* lpMsg)

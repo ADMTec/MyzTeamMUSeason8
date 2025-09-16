@@ -7,6 +7,7 @@
 
 
 #include "stdafx.h"
+#include <stddef.h>
 #include "DSProtocol.h"
 #include "logproc.h"
 #include "DBSockMng.h"
@@ -359,8 +360,113 @@ void DataServerProtocolCore(BYTE protoNum, unsigned char* aRecv, int aLen)
 			JGPSummonerInfo((PMSG_ANS_SUMMONER_CREATE*)aRecv);
 			break;
 		case 0xA4:
-			g_ElementalSystem.DGAnsErtelList((PMSG_ANS_ERTELLIST*)aRecv);
-			break;
+		{
+			if ( aLen < (int)(sizeof(PWMSG_HEAD) + sizeof(int)) )
+			{
+				LogAddTD("[ErtelSync] Received Ertel list packet with insufficient length (%d)", aLen);
+				break;
+			}
+
+			PMSG_ANS_ERTELLIST* lpMsg = (PMSG_ANS_ERTELLIST*)aRecv;
+			int packetSize = (lpMsg->h.sizeH << 8) | lpMsg->h.sizeL;
+			int minimumSize = sizeof(PMSG_ANS_ERTELLIST);
+			int aIndex = lpMsg->aIndex;
+
+			if ( packetSize < minimumSize || aLen < minimumSize )
+			{
+				const int sequenceOffset = (int)(offsetof(PMSG_ANS_ERTELLIST, dwSequence) + sizeof(lpMsg->dwSequence));
+				DWORD truncatedSequence = 0;
+
+				if ( aLen >= sequenceOffset )
+				{
+					truncatedSequence = lpMsg->dwSequence;
+				}
+
+				LogAddTD("[ErtelSync] Truncated Ertel list packet len:%d/%d seq:%u index:%d",
+						aLen, minimumSize, truncatedSequence, aIndex);
+
+				if ( OBJMAX_RANGE(aIndex) && g_ElementalSystem.CanRetryErtelRequest(aIndex) )
+				{
+					LogAddTD("[ErtelSync] Requesting resend due to truncated packet index:%d seq:%u",
+							aIndex, truncatedSequence);
+					g_ElementalSystem.GDReqErtelList(aIndex);
+				}
+
+				break;
+			}
+
+			if ( !OBJMAX_RANGE(aIndex) )
+			{
+				LogAddTD("[ErtelSync] Received Ertel list with invalid index:%d seq:%u",
+						aIndex, lpMsg->dwSequence);
+				break;
+			}
+
+			char szAccount[11];
+			char szName[11];
+
+			memcpy(szAccount, gObj[aIndex].AccountID, 10);
+			szAccount[10] = '\0';
+
+			memcpy(szName, lpMsg->szName, 10);
+			szName[10] = '\0';
+
+			DWORD expectedSequence = g_ElementalSystem.GetPendingErtelSequence(aIndex);
+
+			if ( expectedSequence != 0 && expectedSequence != lpMsg->dwSequence )
+			{
+				LogAddTD("[ErtelSync] Sequence mismatch [%s][%s] expected:%u received:%u",
+						szAccount, szName, expectedSequence, lpMsg->dwSequence);
+
+				if ( g_ElementalSystem.CanRetryErtelRequest(aIndex) )
+				{
+					LogAddTD("[ErtelSync] Requesting resend due to sequence mismatch [%s][%s]",
+							szAccount, szName);
+					g_ElementalSystem.GDReqErtelList(aIndex);
+				}
+				else
+				{
+					LogAddTD("[ErtelSync] Retry limit reached for sequence mismatch [%s][%s]",
+							szAccount, szName);
+				}
+
+				break;
+			}
+
+			if ( expectedSequence == 0 )
+			{
+				LogAddTD("[ErtelSync] Received Ertel list without pending sequence [%s][%s] seq:%u",
+						szAccount, szName, lpMsg->dwSequence);
+			}
+
+			DWORD computedCRC = g_ElementalSystem.BuildErtelDataCRC(
+				lpMsg->ErtelList1, sizeof(lpMsg->ErtelList1),
+				lpMsg->ErtelList2, sizeof(lpMsg->ErtelList2));
+
+			if ( computedCRC != lpMsg->dwCRC )
+			{
+				LogAddTD("[ErtelSync] CRC mismatch [%s][%s] seq:%u expected:%08X received:%08X",
+						szAccount, szName, lpMsg->dwSequence, computedCRC, lpMsg->dwCRC);
+
+				if ( g_ElementalSystem.CanRetryErtelRequest(aIndex) )
+				{
+					LogAddTD("[ErtelSync] Requesting resend due to CRC mismatch [%s][%s]",
+							szAccount, szName);
+					g_ElementalSystem.GDReqErtelList(aIndex);
+				}
+				else
+				{
+					LogAddTD("[ErtelSync] Retry limit reached for CRC mismatch [%s][%s]",
+							szAccount, szName);
+				}
+
+				break;
+			}
+
+			g_ElementalSystem.CompleteErtelSequence(aIndex);
+			g_ElementalSystem.DGAnsErtelList(lpMsg);
+		}
+		break;
 		case 0xEF:
 			{
 				int subcode = -1;
@@ -3538,7 +3644,7 @@ void DGMoveOtherServer(SDHP_CHARACTER_TRANSFER_RESULT * lpMsg)
 		
 		lpObj->m_MoveOtherServer = 0;
 		
-		GCServerMsgStringSend("¹®Á¦ ¹ß»ý½Ã change@webzen.co.kr·Î ¹®ÀÇÇØ ÁÖ½Ã±â¹Ù¶ø´Ï´Ù",lpObj->m_Index, 1);
+		GCServerMsgStringSend("ë¬¸ì œ ë°œìƒì‹œ change@webzen.co.krë¡œ ë¬¸ì˜í•´ ì£¼ì‹œê¸°ë°”ëžë‹ˆë‹¤",lpObj->m_Index, 1);
 		// Deathway translation here
 		return;
 	}
@@ -3546,8 +3652,8 @@ void DGMoveOtherServer(SDHP_CHARACTER_TRANSFER_RESULT * lpMsg)
 	LogAddTD("[CharTrasfer] Success [%s][%s] (%d)",
 		lpObj->AccountID, lpObj->Name, lpMsg->Result);
 
-	GCServerMsgStringSend("Á¢¼ÓÀÌ Á¾·áµË´Ï´Ù.", lpObj->m_Index, 1);// Deathway translation here
-	GCServerMsgStringSend("ºÐÇÒ ¼­¹ö·Î Á¢¼ÓÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.", lpObj->m_Index, 1);// Deathway translation here
+	GCServerMsgStringSend("ì ‘ì†ì´ ì¢…ë£Œë©ë‹ˆë‹¤.", lpObj->m_Index, 1);// Deathway translation here
+	GCServerMsgStringSend("ë¶„í•  ì„œë²„ë¡œ ì ‘ì†í•´ì£¼ì‹œê¸° ë°”ëžë‹ˆë‹¤.", lpObj->m_Index, 1);// Deathway translation here
 	GJSetCharacterInfo(lpObj, lpObj->m_Index, 0);
 	lpObj->LoadWareHouseInfo = false;
 	gObjCloseSet(lpObj->m_Index, 2);

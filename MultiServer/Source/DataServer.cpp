@@ -5,6 +5,53 @@
 #include "DataServerDB.h"
 #include "winutil.h"
 
+namespace
+{
+        DWORD CRC32Init()
+        {
+                return 0xFFFFFFFFu;
+        }
+
+        DWORD CRC32Update(DWORD crc, const BYTE* data, int length)
+        {
+                if ( data == NULL || length <= 0 )
+                {
+                        return crc;
+                }
+
+                for ( int i = 0; i < length; ++i )
+                {
+                        crc ^= data[i];
+
+                        for ( int j = 0; j < 8; ++j )
+                        {
+                                DWORD mask = -(int)(crc & 1);
+                                crc = (crc >> 1) ^ (0xEDB88320u & mask);
+                        }
+                }
+
+                return crc;
+        }
+
+        DWORD CRC32Finalize(DWORD crc)
+        {
+                return ~crc;
+        }
+
+        DWORD CRC32Calculate(const BYTE* data, int length)
+        {
+                return CRC32Finalize(CRC32Update(CRC32Init(), data, length));
+        }
+
+        DWORD CRC32Calculate(const BYTE* first, int firstLength, const BYTE* second, int secondLength)
+        {
+                DWORD crc = CRC32Init();
+                crc = CRC32Update(crc, first, firstLength);
+                crc = CRC32Update(crc, second, secondLength);
+                return CRC32Finalize(crc);
+        }
+}
+
 DS_INFO g_DSInfo;
 
 void DataServerInit()
@@ -1772,27 +1819,45 @@ void DGMuBotOptionRecv(LPMUBOT_SETTINGS_REQ_SAVE lpMsg,int aIndex)
 
 void DGAnsErtelList(LPMSG_REQ_ERTELLIST lpMsg,int aIndex)
 {
-	char szName[MAX_IDSTRING+1];
-	char szAccount[MAX_IDSTRING+1];
+        char szName[MAX_IDSTRING+1];
+        char szAccount[MAX_IDSTRING+1];
 
-	memcpy(szAccount,lpMsg->szAccount,MAX_IDSTRING);
-	szAccount[MAX_IDSTRING] = '\0';
+        memcpy(szAccount,lpMsg->szAccount,MAX_IDSTRING);
+        szAccount[MAX_IDSTRING] = '\0';
 
-	memcpy(szName,lpMsg->szName,MAX_IDSTRING);
-	szName[MAX_IDSTRING] = '\0';
+        memcpy(szName,lpMsg->szName,MAX_IDSTRING);
+        szName[MAX_IDSTRING] = '\0';
 
-	PMSG_ANS_ERTELLIST pMsg;
-	pMsg.h.c = 0xC2;
-	pMsg.h.sizeH = SET_NUMBERH(sizeof(pMsg));
-	pMsg.h.sizeL = SET_NUMBERL(sizeof(pMsg));
-	pMsg.h.headcode = 0xA4;
+        DWORD expectedRequestCRC = CRC32Calculate((const BYTE*)lpMsg->szAccount, 10, (const BYTE*)lpMsg->szName, 10);
 
-	pMsg.aIndex = lpMsg->aIndex;
-	memcpy(pMsg.szName,szName,10);
+        if ( lpMsg->dwCRC != expectedRequestCRC )
+        {
+                g_Window.ServerLogAdd(ST_DATASERVER,
+                        "[ErtelSync] Request CRC mismatch seq:%u [%s][%s] expected:%08X received:%08X",
+                        lpMsg->dwSequence, szAccount, szName, expectedRequestCRC, lpMsg->dwCRC);
+        }
 
-	GetErtelList(szAccount,szName,&pMsg);
+        PMSG_ANS_ERTELLIST pMsg;
+        memset(&pMsg, 0, sizeof(pMsg));
+        pMsg.h.c = 0xC2;
+        pMsg.h.sizeH = SET_NUMBERH(sizeof(pMsg));
+        pMsg.h.sizeL = SET_NUMBERL(sizeof(pMsg));
+        pMsg.h.headcode = 0xA4;
 
-	DataSend(aIndex,(LPBYTE)&pMsg,sizeof(pMsg));
+        pMsg.aIndex = lpMsg->aIndex;
+        memcpy(pMsg.szName,szName,10);
+
+        pMsg.dwSequence = lpMsg->dwSequence;
+
+        GetErtelList(szAccount,szName,&pMsg);
+
+        pMsg.dwCRC = CRC32Calculate(pMsg.ErtelList1, sizeof(pMsg.ErtelList1), pMsg.ErtelList2, sizeof(pMsg.ErtelList2));
+
+        g_Window.ServerLogAdd(ST_DATASERVER,
+                "[ErtelSync] DGAnsErtelList seq:%u [%s][%s] crc:%08X",
+                pMsg.dwSequence, szAccount, szName, pMsg.dwCRC);
+
+        DataSend(aIndex,(LPBYTE)&pMsg,sizeof(pMsg));
 }
 
 void DGSaveErtelList(LPMSG_SAVE_ERTELLIST lpMsg)

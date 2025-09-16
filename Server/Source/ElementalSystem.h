@@ -2,6 +2,7 @@
 #define __ELEMENTALSYSTEM_H__
 
 #include "..\common\zzzitem.h"
+#include <map>
 
 #pragma pack(push)
 #pragma pack(1)
@@ -70,20 +71,24 @@ struct PMSG_ANS_REMOVEERTEL
 
 struct PMSG_REQ_ERTELLIST
 {
-	PBMSG_HEAD h;
-	int aIndex;
-	char szAccount[10];
-	char szName[10];
+        PBMSG_HEAD h;
+        int aIndex;
+        char szAccount[10];
+        char szName[10];
+        DWORD dwSequence;
+        DWORD dwCRC;
 };
 
 struct PMSG_ANS_ERTELLIST
 {
-	PWMSG_HEAD h;
-	int aIndex;
-	char szName[10];
+        PWMSG_HEAD h;
+        int aIndex;
+        char szName[10];
 
-	BYTE ErtelList1[700];
-	BYTE ErtelList2[700];
+        BYTE ErtelList1[700];
+        BYTE ErtelList2[700];
+        DWORD dwSequence;
+        DWORD dwCRC;
 };
 
 struct PMSG_SAVE_ERTELLIST
@@ -304,21 +309,34 @@ public:
 	void ErrtelRankUp(LPOBJ lpObj,BYTE btRank);
 	void PentagramMix(LPOBJ lpObj);
 
-	// DB 
-	void GDReqErtelList(int aIndex);
-	void DGAnsErtelList(PMSG_ANS_ERTELLIST* lpMsg);
-	void GDSaveErtelList(int aIndex);
+        // DB
+        void GDReqErtelList(int aIndex);
+        void DGAnsErtelList(PMSG_ANS_ERTELLIST* lpMsg);
+        void GDSaveErtelList(int aIndex);
+
+        DWORD BuildErtelDataCRC(const BYTE* list1, int list1Size, const BYTE* list2, int list2Size) const;
+        DWORD BuildErtelRequestCRC(const char* account, const char* name) const;
+        DWORD GetPendingErtelSequence(int aIndex) const;
+        void CompleteErtelSequence(int aIndex);
+        bool CanRetryErtelRequest(int aIndex) const;
+        int GetErtelRetryCount(int aIndex) const;
 
 public:
 	ELEMENT_CLASS_INFO m_classinfo[MAX_TYPE_PLAYER];
 	BYTE m_DamageTable[5][5];
 	ERTEL_OPTION m_ErtelOption[MAX_ERTEL_OPTION];
-	PENTAGRAM_OPTION m_PentagramItems[MAX_PENTAGRAM_ITEMS];
-	PENTAGRAM_OPTION_INFO m_PentagramOptionInfo[MAX_PENTAGRAM_OPTIONS];
+        PENTAGRAM_OPTION m_PentagramItems[MAX_PENTAGRAM_ITEMS];
+        PENTAGRAM_OPTION_INFO m_PentagramOptionInfo[MAX_PENTAGRAM_OPTIONS];
 
 
-	TRandomPoolMgr m_OptionRate;
-	TRandomPoolMgr m_SlotCountRate;
+        TRandomPoolMgr m_OptionRate;
+        TRandomPoolMgr m_SlotCountRate;
+
+private:
+        DWORD GetNextErtelSequence();
+        DWORD m_ErtelSequenceCounter;
+        std::map<int, DWORD> m_mapPendingErtelSequences;
+        std::map<int, int> m_mapErtelRetryCount;
 
 	int m_iSpiritMap_DropLevel;
 	int m_iSpiritMap_DropRate;
