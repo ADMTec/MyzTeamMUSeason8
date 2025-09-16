@@ -1438,20 +1438,24 @@ typedef struct
 
 typedef struct
 {
-	PBMSG_HEAD h;
-	int aIndex;
-	char szAccount[10];
-	char szName[10];
+        PBMSG_HEAD h;
+        int aIndex;
+        char szAccount[10];
+        char szName[10];
+        DWORD dwSequence;
+        DWORD dwCRC;
 }PMSG_REQ_ERTELLIST, *LPMSG_REQ_ERTELLIST;
 
 typedef struct
 {
-	PWMSG_HEAD h;
-	int aIndex;
-	char szName[10];
+        PWMSG_HEAD h;
+        int aIndex;
+        char szName[10];
 
-	BYTE ErtelList1[700];
-	BYTE ErtelList2[700];
+        BYTE ErtelList1[700];
+        BYTE ErtelList2[700];
+        DWORD dwSequence;
+        DWORD dwCRC;
 }PMSG_ANS_ERTELLIST, *LPMSG_ANS_ERTELLIST;
 
 typedef struct
